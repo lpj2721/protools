@@ -7,11 +7,13 @@
 from db_pool import engine
 from db_logs import *
 
+db_pool = engine()
+
 
 def test_add():
     return "aaa"
 
 __all__ = (
-    'engine',
+    'db_pool',
 )
 

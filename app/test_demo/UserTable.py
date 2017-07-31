@@ -6,9 +6,8 @@
 """
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime
-from app.mysql_db import engine
-# ModelBase = declarative_base()  # <-元类
-from . import ModelBase
+from app.mysql_db import db_pool
+ModelBase = declarative_base()  # <-元类
 
 
 class User(ModelBase):
@@ -19,6 +18,12 @@ class User(ModelBase):
     username = Column(String(length=30))
     password = Column(String(length=128))
 
-ModelBase.metadata.drop_all(bind=engine)
+
+class ProductCategory(ModelBase):
+    __tablename__ = "product_category"
+    category_id = Column(Integer, primary_key=True, autoincrement=True, comment= u"商品分类id")
+    name = Column(String(50), nullable=False, default=u"分类名称")
+
+ModelBase.metadata.drop_all(bind=db_pool)
 print 123
-ModelBase.metadata.create_all(bind=engine)
+ModelBase.metadata.create_all(bind=db_pool)

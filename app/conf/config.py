@@ -70,12 +70,13 @@ dbs = {
 # failures
 # ping
 mysql_pool_configs = {
-    "url": "mysql://green_dev:protools_dev@10.10.51.30:3306/protools_dev",
+    "url": "mysql://root:123456@192.168.171.100:3306/protools_dev?charset=utf8",
 
 }
 
 mongo_pool_config = {
 }
+mysql_pool_config = {}
 
 # connection_class
 redis_pool_config = {

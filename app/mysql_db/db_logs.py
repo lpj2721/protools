@@ -9,6 +9,9 @@ from sqlalchemy.engine import Engine
 from app.conf.config import pool_log_config, sqltime_log_config
 from app.untils.log_builder import build_log
 import time
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 pool_logger = build_log(pool_log_config)
 sqltime_logger = build_log(sqltime_log_config)
 
@@ -17,7 +20,9 @@ sqltime_logger = build_log(sqltime_log_config)
 def before_cursor_execute(conn, cursor, statement,
                          parameters, context, executemany):
     conn.info.setdefault('query_start_time',time.time())
-    sqltime_logger.debug("Start Query: {},Query Parameters: {}".format(statement,parameters))
+    print 11123
+    print type(statement)
+    sqltime_logger.debug("Start Query: {},Query Parameters: {}".format(str(statement), str(parameters)))
 
 
 @listens_for(Engine, "after_cursor_execute")
@@ -25,7 +30,7 @@ def after_cursor_execute(conn, cursor, statement,
                          parameters, context, executemany):
     total = time.time() - conn.info['query_start_time']
     sqltime_logger.debug("Start Query: {},Query Parameters: {},Query Complete!Total Time:{}".
-                         format(statement, parameters, total))
+                         format(str(statement), str(parameters), total))
 
 
 @listens_for(Engine, "connect")
