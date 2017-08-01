@@ -45,7 +45,7 @@ dbs = {
         "pool_size": 5,  # 0表示不使用连接池 最小连接数
         "user_name": "",
         "password": "",
-        "db_name": "greenDB"
+        "db_name": "greenDB_test"
     },
     "redis": {
         "type": db_type["redis"],
